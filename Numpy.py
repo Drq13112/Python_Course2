@@ -109,12 +109,64 @@ let's do some exercise which show us some real utilities for this library.
 """
 Write a NumPy program to convert the values of Centigrade degrees into Fahrenheit degrees and vice versa. 
 Values are stored into a NumPy array
-"""
+
+Sample Array:
+Values in Fahrenheit degrees [0, 12, 45.21, 34, 99.91]
+Values in Centigrade degrees [-17.78, -11.11, 7.34, 1.11, 37.73, 0. ]
 
 """
-Write a NumPy program to find the real and imaginary parts of an array of complex numbers
+fvalues = [0, 12, 45.21, 34, 99.91, 32]
+F = np.array(fvalues)
+print("Values in Fahrenheit degrees:")
+print(F)
+
+print("Values in  Centigrade degrees:")
+print(np.round((5*F/9 - 5*32/9),2))
 """
+Write a NumPy program to find the real and imaginary parts of an array of complex numbers
+
+Original array [ 1.0+0.j 0.70710678+0.70710678j]
+Real part of the array:
+[ 1. 0.70710678]
+Imaginary part of the array:
+[ 0. 0.70710678]
+"""
+x = np.sqrt([[1+0j],[0+1j]])
+print("Original array:x ",x)
+print("Real part of the array:")
+print(x.real)
+print("Imaginary part of the array:")
+print(x.imag)
 
 """
 Write a NumPy program to get the unique elements of an array
+
+Array from which to draw their unique elements
+[10, 10, 20, 20, 30, 40]
+[[1, 1], [2, 3]]
 """
+x = np.array([10, 10, 20, 20, 30, 40])
+print("Original array:")
+print(x)
+print("Unique elements of the above array:")
+print(np.unique(x))
+
+x = np.array([[1, 3], [2, 3]])
+print("Original array:")
+print(x)
+print("Unique elements of the above array:")
+print(np.unique(x))
+"""
+HOMEWORK
+Write a NumPy program to find the 3th element of a specified array:
+
+[[2, 4, 6], [6, 8, 10]]
+"""
+
+x = np.array([[2, 4, 6], [6, 8, 10]], np.int32)
+print(x)
+# Notice the interpeter starts to count from 0, 
+# so that the third position is actually in the second one: 0 1 ->2<- 
+e1 = x.flat[2] 
+print("Third e1ement of the array:")
+print(e1)
