@@ -1,4 +1,4 @@
-import Numpy as np
+import numpy as np
 
 """
 The main advantage of numpy over the default lists provided is that numpy's processing 
@@ -49,8 +49,8 @@ np.full(dimensions, value) :Generate and return a reference to an array en la tu
 np.identity(n) :Generate and return a reference to the indenty matrix of n dimensions.
 
 """
-print(np.zeros(3, 2))
-print(np.idendity(3))
+a=np.zeros((3, 2))
+print("a:",a)
 
 """
 Once we have created a numpy array, we can use a wide range of method on it.
@@ -64,14 +64,13 @@ a.size :  Return the amount of number the array has inside.
 
 a.dtype: Return what data type the array has inside.
 """
+print(a3.ndim)
 
-a3.ndim()
+print(a3.shape)
 
-a3.shape()
+print(a3.size)
 
-a3.size()
-
-a3.dtype()
+print(a3.dtype)
 
 """
 We can also filter the array elemnts. 
@@ -80,7 +79,6 @@ This provide a fast way extract elements from it.
 a = np.array([[1, 2, 3], [4, 5, 6]])
 print(a[(a % 2 == 0)])
 print(a[(a % 2 == 0) & (a > 2)])
-
 """
 Obviusly numpy give us some fuctions that we can use to operate between Numpy Objects.
 For instance, if want to do the product of two matrix, it can be sused np.dot(matrix1,matrix2).
@@ -106,14 +104,24 @@ let's do some exercise which show us some real utilities for this library.
 
 """
 
+
+
+
+
+
+
 """
 Write a NumPy program to convert the values of Centigrade degrees into Fahrenheit degrees and vice versa. 
 Values are stored into a NumPy array
 
 Sample Array:
-Values in Fahrenheit degrees [0, 12, 45.21, 34, 99.91]
-Values in Centigrade degrees [-17.78, -11.11, 7.34, 1.11, 37.73, 0. ]
+    
+Values in Fahrenheit degrees :
+[0, 12, 45.21, 34, 99.91]
 
+
+Values in Centigrade degrees :
+[-17.78, -11.11, 7.34, 1.11, 37.73, 0. ]
 """
 fvalues = [0, 12, 45.21, 34, 99.91, 32]
 F = np.array(fvalues)
@@ -122,12 +130,26 @@ print(F)
 
 print("Values in  Centigrade degrees:")
 print(np.round((5*F/9 - 5*32/9),2))
+
+
+
+
+
+
+
+
 """
 Write a NumPy program to find the real and imaginary parts of an array of complex numbers
 
-Original array [ 1.0+0.j 0.70710678+0.70710678j]
+
+Original array:
+[ 1.0+0.j 0.70710678+0.70710678j]
+
+
 Real part of the array:
 [ 1. 0.70710678]
+
+
 Imaginary part of the array:
 [ 0. 0.70710678]
 """
@@ -138,10 +160,18 @@ print(x.real)
 print("Imaginary part of the array:")
 print(x.imag)
 
+
+
+
+
+
+
+
+
 """
 Write a NumPy program to get the unique elements of an array
-
 Array from which to draw their unique elements
+
 [10, 10, 20, 20, 30, 40]
 [[1, 1], [2, 3]]
 """
@@ -156,10 +186,18 @@ print("Original array:")
 print(x)
 print("Unique elements of the above array:")
 print(np.unique(x))
+
+
+
+
+
+
+
+
+
 """
 HOMEWORK
 Write a NumPy program to find the 3th element of a specified array:
-
 [[2, 4, 6], [6, 8, 10]]
 """
 
@@ -170,3 +208,150 @@ print(x)
 e1 = x.flat[2] 
 print("Third e1ement of the array:")
 print(e1)
+
+
+
+
+
+
+
+
+
+# Second Session
+
+"""
+Well, we have learnt the numpy basics, how to create a numpy array and how we an work with it.
+
+During this session we are going to use the numpy library to perform more complex exercises.
+In this way, we will be able to get a better view of how easy 
+it is to use this library for programming.
+"""
+
+
+
+
+
+
+
+
+
+"""
+
+Write a NumPy program to multiply a matrix by another matrix of complex numbers 
+and create a new matrix of complex numbers.
+
+Sample output:
+    
+    
+First array:
+[ 1.+2.j 3.+4.j]
+
+
+Second array:
+[ 5.+6.j 7.+8.j]
+
+
+Product of above two arrays:
+(70-8j)
+
+"""
+
+x = np.array([1+2j,3+4j])
+print("First array:")
+print(x)
+y = np.array([5+6j,7+8j])
+print("Second array:")
+print(y)
+z = np.vdot(x, y)
+print("Product of above two arrays:")
+print(z)
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+Write a NumPy program to create a random array with 1000 elements 
+and compute the average, variance, standard deviation of the array elements. 
+
+Sample output:
+    
+    
+Average of the array elements:
+-0.0255137240796
+
+
+Standard deviation of the array elements:
+0.984398282476
+
+
+Variance of the array elements:
+0.969039978542
+"""
+x = np.random.randn(1000)
+print("Average of the array elements:")
+mean = x.mean()
+print(mean)
+print("Standard deviation of the array elements:")
+std = x.std()
+print(std)
+print("Variance of the array elements:")
+var = x.var()
+print(var)
+
+
+
+
+
+
+
+
+
+"""
+Write a NumPy program to create a structured array from given student name, height, class and their data types. 
+Now sort by class, then height if class are equal.
+    
+Original array:
+[(b'James', 5, 48.5 ) (b'Nail', 6, 52.5 ) (b'Paul', 5, 42.1 ) (b'Pit', 5, 40.11)]
+
+
+Sort by age, then height if class are equal:
+[(b'Pit', 5, 40.11) (b'Paul', 5, 42.1 ) (b'James', 5, 48.5 ) (b'Nail', 6, 52.5 )]
+"""
+data_type = [('name', 'S15'), ('class', int), ('height', float)]
+students_details = [('James', 5, 48.5), ('Nail', 6, 52.5),('Paul', 5, 42.10), ('Pit', 5, 40.11)]
+# create a structured array
+students = np.array(students_details, dtype=data_type)   
+print("Original array:")
+print(students)
+print("Sort by class, then height if class are equal:")
+print(np.sort(students, order=['class', 'height']))
+
+
+
+
+"""
+Write a NumPy program to convert angles from degrees to radians for all elements in a given array.
+
+Sample Input: [-180., -90., 90., 180.]
+Sample Output:[-3.14159265 -1.57079633  1.57079633  3.14159265]
+"""
+#Two ways:
+    
+#1º
+degrees=np.array([-180.,  -90.,   90.,  180.])
+r1 = np.radians(degrees)
+r2 = np.deg2rad(degrees)
+assert np.array_equiv(r1, r2)
+print("radians_1º:",r1)
+
+#2º
+radians=np.round((3.141592659*degrees/180),5)
+print("radians_2º:",radians)
