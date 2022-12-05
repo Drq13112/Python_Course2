@@ -206,5 +206,39 @@ print(df.nsmallest(3, 'score'))
 print("\nLargest 3 records within each group of a DataFrame:")
 print(df.nlargest(3, 'score'))
 
+"""
+We've working with a only data set of data, but there's going to be situations when we'll have to join 
+differents data sets or merge our data set into others.
 
+So, we have some methods that Pndas Library includes to do this operations. Let's see some of them:
+"""
+# In case of joining two data sets, we can do it along the rows or the columns
 
+student_data1 = pd.DataFrame({
+        'student_id': ['S1', 'S2', 'S3', 'S4', 'S5'],
+         'name': ['Danniella Fenton', 'Ryder Storey', 'Bryce Jensen', 'Ed Bernal', 'Kwame Morin'], 
+        'marks': [200, 210, 190, 222, 199]})
+
+student_data2 = pd.DataFrame({
+        'student_id': ['S4', 'S5', 'S6', 'S7', 'S8'],
+        'name': ['Scarlette Fisher', 'Carla Williamson', 'Dante Morse', 'Kaiser William', 'Madeeha Preston'], 
+        'marks': [201, 200, 198, 219, 201]})
+
+# We are going to use the same method for this action, but will use an argument to let the methos knows which action has to do
+# The argument axis=1 will let the method know that it has to join the data sets along columns
+result_data = pd.concat([student_data1, student_data2], axis = 1)
+print("result_data:")
+print(result_data)
+# In case we don't define it (use the default value), the method will do it along rows
+result_data = pd.concat([student_data1, student_data2])
+print("result_data:")
+print(result_data)
+# As we can see through the console, the option which makes more sense for our data set, it is the second one
+
+# We  can also use this other method instead of the previous one
+combined_data = student_data1.append(student_data2, ignore_index = True)
+print("combined_data:")
+print(combined_data)
+
+# Okey, now let's do it backwards. We'll merge it to get two data sets:
+    
