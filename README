@@ -121,10 +121,3 @@ array[1:2, :]	                  Select items of row 1
 [comment]: <> (	array[1,...]
 array[ : :-1]	                  Reverses array
 
-
-
-
-
-
-
-https://aprendeconalf.es/docencia/python/manual/img/pandas-dataframe.png
