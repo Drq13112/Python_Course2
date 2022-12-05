@@ -190,6 +190,11 @@ print("Number of attempts in the examination is more than 2 and score greater th
 print(df[(df['attempts'] > 2) & (df['score'] > 15)])
 
 
+
+
+#HOMEWORK
+
+
 # Well, now will try to select only the people whose qualify ended up in yes
 
 # We have different ways to have this date, these are some of them
@@ -206,13 +211,27 @@ print(df.nsmallest(3, 'score'))
 print("\nLargest 3 records within each group of a DataFrame:")
 print(df.nlargest(3, 'score'))
 
+
+
+
+
+
+#Sesion 2:
+
+
+
+
+
+
+
+
 """
-We've working with a only data set of data, but there's going to be situations when we'll have to join 
-differents data sets or merge our data set into others.
+We've working with a only data set of data, but there's going to be situations when we'll have to merge
+differents data sets or split our data set into others.
 
 So, we have some methods that Pndas Library includes to do this operations. Let's see some of them:
 """
-# In case of joining two data sets, we can do it along the rows or the columns
+# In case of merging two data sets, we can do it along the rows or the columns
 
 student_data1 = pd.DataFrame({
         'student_id': ['S1', 'S2', 'S3', 'S4', 'S5'],
@@ -225,7 +244,7 @@ student_data2 = pd.DataFrame({
         'marks': [201, 200, 198, 219, 201]})
 
 # We are going to use the same method for this action, but will use an argument to let the methos knows which action has to do
-# The argument axis=1 will let the method know that it has to join the data sets along columns
+# The argument axis=1 will let the method know that it has to merge the data sets along columns
 result_data = pd.concat([student_data1, student_data2], axis = 1)
 print("result_data:")
 print(result_data)
@@ -240,5 +259,104 @@ combined_data = student_data1.append(student_data2, ignore_index = True)
 print("combined_data:")
 print(combined_data)
 
-# Okey, now let's do it backwards. We'll merge it to get two data sets:
+# Okey, now let's do it backwards. We'll split it to get two datasets:
     
+# splitting dataframe in a particular size
+df_split = combined_data.sample(frac=0.6,random_state=200)
+df_split.reset_index()
+print("df_split:")
+print(df_split)
+
+
+# Splitting dataframe by row index
+df_1 = df.iloc[:2,:]
+df_2 = df.iloc[2:,:]
+print("Shape of new dataframes - {} , {}".format(df_1.shape, df_2.shape))
+
+print(df_1)
+print(df_2)
+
+
+# splitting dataframe by groups
+# grouping by particular dataframe column
+grouped = df.groupby(df.qualify)
+df_yes = grouped.get_group("yes")
+df_no = grouped.get_group("no")
+print(df_yes)
+print(df_no)
+
+
+"""
+Exercise:
+    
+    
+Column      Name	                        Description
+price   ->    price in US dollars           (\$326--\$18,823)
+carat   ->    weight of the diamond         (0.2--5.01)
+cut     ->    quality of the cut            (Fair, Good, Very Good, Premium, Ideal)
+color   ->    diamond colour                from J (worst) to D (best)
+clarity ->    a measurement 
+              of how clear the diamond is:  (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+              
+              
+x       ->    length in mm                  (0--10.74)
+y       ->    width in mm                   (0--58.9)
+z       ->    depth in mm                   (0--31.8)
+depth   ->    total depth percentage        z / mean(x, y) = 2 * z / (x + y) (43--79)
+table   ->    width of top of diamond 
+              relative to widest point      (43--95)
+
+"""
+diamonds = pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/diamonds.csv')
+print(diamonds)
+
+
+"""
+Write a Pandas program to find the diamonds that are with a Fair or Good or Premium.
+"""
+result = diamonds[diamonds.cut.isin(['Fair', 'Good', 'Premium'])]
+print(result.head())
+
+
+
+"""
+Write a Pandas program to iterate through diamonds DataFrame
+"""
+print("\nIterate through diamonds DataFrame:")
+for index, row in diamonds.iterrows():
+   print(index, row.carat, row.cut, row.color, row.price)
+   
+   
+   
+"""
+Write a Pandas program to calculate count, minimum, maximum price for each cut of diamonds DataFrame
+"""
+
+print("\nCount, minimum, maximum  price for each cut of diamonds DataFrame:")
+print(diamonds.groupby('cut').price.agg(['count', 'min', 'max']))
+
+
+"""
+Write a Pandas program to calculate the multiply of length, width and depth for each cut of diamonds DataFrame
+"""
+
+print("\nMultiply of length, width and depth for each cut:")
+print((diamonds.x*diamonds.y*diamonds.z).head())
+
+"""
+Write a Pandas program to read the diamonds DataFrame and detect duplicate color.
+
+Note: duplicated () function returns boolean Series denoting duplicate rows, optionally only considering certain columns.
+"""
+
+print("\nCount the duplicate items:")
+print(diamonds.clarity.duplicated().sum())
+
+
+#HOMEWORK
+
+"""
+Write a Pandas program to calculate various summary statistics of cut series of diamonds DataFrame.
+"""
+print("\nVarious summary statistics of diamonds DataFrame:")
+print(diamonds.carat.describe())
