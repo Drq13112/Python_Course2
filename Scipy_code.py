@@ -6,13 +6,18 @@ Github: Drq13112
 
 from scipy.optimize import basinhopping
 from numpy.random import rand
+from numpy import arange
 from numpy import exp
 from numpy import sqrt
 from numpy import cos
 from numpy import e
 from numpy import pi
 from scipy import constants
+from numpy import meshgrid
+from matplotlib import pyplot
+from mpl_toolkits.mplot3d import Axes3D
 from scipy.optimize import root, minimize
+
 """
 
 Scipy is a scientific computacion library which uses numpy underneath.
@@ -154,8 +159,47 @@ def objective(v):
  x, y = v
  return -20.0 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + e + 20
 
+"""
+ First, let's have an overview of the function.
+ I'm gonna use some fuctions and matplotlib to get a graphic of the function.
+ I's no needed to use the function basinhopping, it's just to see how the function is.
+"""
+
+"""
+Showing the function aspect
+"""
 # define range for input
 r_min, r_max = -5.0, 5.0
+# sample input range uniformly at 0.1 increments
+xaxis = arange(r_min, r_max, 0.1)
+yaxis = arange(r_min, r_max, 0.1)
+# create a mesh from the axis
+x, y = meshgrid(xaxis, yaxis)
+v= [x,y]
+# compute targets
+results = objective(v)
+# create a surface plot with the jet color scheme
+figure = pyplot.figure()
+axis = figure.gca(projection='3d')
+axis.plot_surface(x, y, results, cmap='jet')
+# show the plot
+pyplot.show()
+
+"""
+Finding the global minimun.
+
+This time we are using the basinhopping method, 
+but there're many other allowed to use.
+
+This method consists in:
+    
+Basin-hopping is a two-phase method that combines a global stepping algorithm 
+with local minimization at each step. 
+
+As the step-taking, step acceptance, and minimization methods are all customizable, 
+this function can also be used to implement other two-phase methods.
+"""
+
 # define the starting point as a random sample from the domain
 pt = r_min + rand(2) * (r_max - r_min)
 # perform the basin hopping search
@@ -177,6 +221,8 @@ In this case, we can see that the algorithm located the optima with inputs very 
 and an objective function evaluation that is practically zero.
 
 """
+
+
 # SciPy Sparse Data
 
 # Sparse data is data that has mostly unused elements (elements that don't carry any information ).
